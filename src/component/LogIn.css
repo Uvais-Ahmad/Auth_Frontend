@@ -1,27 +1,28 @@
-.logInForm{
+.Form{
     /* max-width: 600px; */
     min-width: 20vw;
     width: 35vw;
-    height: 70vh;
-    background-color: #c7cbeb;
-    border-radius: 25px;
-    margin-top: 10vh;
-    box-shadow: 1px 1px 10px 4px #696a70;
+    min-height: 60vh;
+    /* background-color: #c7cbeb; */
+    border-radius: 10px;
+    margin-top: 5vh;
+    box-shadow: 1px 1px 10px 4px #6f7072;
+    background-color: #ffffff;
 }
 
-.logInForm input{
+.Form input{
     color: #8c8c8f;
     padding: .5rem 1rem;
     font-weight: 300;
     
 }
 
-.logInForm input::placeholder{
+.Form input::placeholder{
     color: #8c8c8f;
     font-weight: 400;
 }
 
-.logInForm label{
+.Form label{
     font-weight: 800;
     color: #454547;
 }

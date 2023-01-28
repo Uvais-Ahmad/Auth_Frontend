@@ -22,8 +22,8 @@ function LogIn (){
 
     return (
         <>
-            <Form className="logInForm p-5 mx-auto" onSubmit={handleSubmitbtn}>
-                <h1 style={{textAlign:'center'}}>Log In</h1>
+            <Form className="Form px-5 py-3 mx-auto" onSubmit={handleSubmitbtn}>
+                <h1 style={{textAlign:'center'}} className="mb-3">Log In</h1>
                 <FormGroup className="my-4">
                     <FormLabel >Email or Username</FormLabel>
                     <FormControl type="text" name="email" value={registeration.email} placeholder="e.g. abc@xyz.uv" onChange={handleSubmit} required></FormControl>
@@ -34,7 +34,7 @@ function LogIn (){
                     <FormControl type="password" name="password" value={registeration.password} placeholder="Enter password" onChange={handleSubmit} required></FormControl>
                 </FormGroup>
 
-                <Button className="w-100 mb-1" variant="primary" type="submit" >Log In</Button>
+                <Button  style={{backgroundColor:'#090938',fontWeight:'bolder'}}  className="w-100 mb-1" type="submit" >Log In</Button>
                 <FormText ><a href="/">Forgot Password ?</a></FormText>
             </Form>
         </>
