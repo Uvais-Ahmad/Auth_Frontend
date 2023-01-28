@@ -1,0 +1,30 @@
+.logInForm{
+    /* max-width: 600px; */
+    min-width: 20vw;
+    width: 35vw;
+    height: 70vh;
+    background-color: #c7cbeb;
+    border-radius: 25px;
+    margin-top: 10vh;
+    box-shadow: 1px 1px 10px 4px #696a70;
+}
+
+.logInForm input{
+    color: #8c8c8f;
+    padding: .5rem 1rem;
+    font-weight: 300;
+    
+}
+
+.logInForm input::placeholder{
+    color: #8c8c8f;
+    font-weight: 400;
+}
+
+.logInForm label{
+    font-weight: 800;
+    color: #454547;
+}
+
+
+

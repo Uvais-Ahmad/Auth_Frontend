@@ -1,0 +1,19 @@
+
+nav a{
+    text-decoration: none;
+    color: #124d5e;
+    font-weight: 600;
+    padding: 5px;
+  }
+  
+  nav a:hover{
+    color: #0a2368;
+    background-color: #9fb1be;
+    border-radius: 10px;
+    
+  
+  }
+  
+  nav .active{
+    color: #9fb1be ;
+  }
