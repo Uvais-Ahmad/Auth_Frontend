@@ -5,11 +5,12 @@ function NavvBar() {
     return(
         <>
             <Navbar bg="dark" variant="dark">
-                <Container >
+                <Container className="cont">
                     <Navbar.Brand >MERN</Navbar.Brand>
                         <Nav className="me-auto">
                             <NavLink className="m-1" to='/'>Home</NavLink>
                             <NavLink className="m-1" to='/login-user'>LogIn</NavLink>
+                            <NavLink className="m-1" to='/add-user'>Register</NavLink>
                             <NavLink className="m-1" to='/add-order'>Add Order</NavLink>
                             <NavLink className="m-1" to='/get-order'>All Orders</NavLink>
                         </Nav>

@@ -13,6 +13,10 @@ nav a{
     
   
   }
+
+  nav .cont{
+    margin-left: 20px;
+  }
   
   nav .active{
     color: #9fb1be ;
