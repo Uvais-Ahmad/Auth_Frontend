@@ -5,33 +5,34 @@ import { useState } from "react";
 // This component known as a CONTROLLED COMPONENT
 function LogIn (){
 
-    const [registeration , setRegisteration] = useState({
-        email:"",password:""
+    const [userInfo , setUserInfo] = useState({
+        phone:"",password:""
     })
 
-    function handleSubmit(e){
+    function handleChange(e){
         const name = e.target.name;
         const value = e.target.value;
-        
-        setRegisteration({...registeration , [name]:value})
+        console.log(`${name}:${value}`);
+        setUserInfo({...userInfo , [name]:value})
     }
 
-    function handleSubmitbtn(e){
-        
+    function handleSubmit(e){
+        e.preventDefault();
+        console.log("User Info ",userInfo);
     }    
 
     return (
         <>
-            <Form className="Form px-5 py-3 mx-auto" onSubmit={handleSubmitbtn}>
+            <Form className="Form px-5 py-3 mx-auto" onSubmit={handleSubmit}>
                 <h1 style={{textAlign:'center'}} className="mb-3">Log In</h1>
                 <FormGroup className="my-4">
-                    <FormLabel >Email or Username</FormLabel>
-                    <FormControl type="text" name="email" value={registeration.email} placeholder="e.g. abc@xyz.uv" onChange={handleSubmit} required></FormControl>
+                    <FormLabel >Phone</FormLabel>
+                    <FormControl type="text" name="phone" value={userInfo.phone} placeholder="e.g. 989xxxxxxx" onChange={handleChange} required></FormControl>
                 </FormGroup>
 
                 <FormGroup className="my-4">
                     <FormLabel >Password</FormLabel>
-                    <FormControl type="password" name="password" value={registeration.password} placeholder="Enter password" onChange={handleSubmit} required></FormControl>
+                    <FormControl type="password" name="password" value={userInfo.password} placeholder="Enter password" onChange={handleChange} required></FormControl>
                 </FormGroup>
 
                 <Button  style={{backgroundColor:'#090938',fontWeight:'bolder'}}  className="w-100 mb-1" type="submit" >Log In</Button>
