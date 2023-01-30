@@ -24,7 +24,7 @@ function App() {
           <Route path='/login-user' element={ <LogIn handleUser = {setUser}/> }/>
           <Route path='/add-user' element={ <Register /> }/>
           <Route path='/add-order' element={ <AddOrder user = {user}/> }/>
-          <Route path='/get-order' element={ <GetOrder /> }/>
+          <Route path='/get-order' element={ <GetOrder user = {user}/> }/>
         </Routes>
       </BrowserRouter>
       

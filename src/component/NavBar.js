@@ -3,7 +3,12 @@ import { Container, Nav, Navbar} from 'react-bootstrap'
 import './NavBar.css';
 function NavvBar(props) {
 
-    let user = props.user.data.data;
+    let user = props.user;
+    let url ='';
+    if(user){
+        url = `/get-order/${user.data.data.id}`;
+    }
+
     console.log("User in Navbar ",user);
     return(
         <>
@@ -13,9 +18,9 @@ function NavvBar(props) {
                         {
                             (user) ? 
                             <Nav>
-                                <NavLink className="m-1" to=''>{user.name}</NavLink>
+                                <NavLink className="m-1" to=''>{user.data.data.name}</NavLink>
                                 <NavLink className="m-1" to='/add-order'>Add Order</NavLink>
-                                <NavLink className="m-1" to='/get-order'>All Orders</NavLink>
+                                <NavLink className="m-1" to= {url} >All Orders</NavLink>
                             </Nav>
                                     :
                             <Nav className="me-auto">

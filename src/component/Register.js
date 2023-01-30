@@ -28,9 +28,7 @@ function Register () {
             console.log("User response ",user);
 
             navigate('/login-user');
-            // await setUserInfo({
-            //     name:"",phone:"",password:"",confirm_password:""
-            // });
+            
         }
         catch(err){
             console.log("Error while POST req ",err);
@@ -49,7 +47,7 @@ function Register () {
         <Form className="Form h-75 px-5 py-3 mx-auto" onSubmit={handleSubmit}>
             <h1 style={{textAlign:'center'}}>Register</h1>
 
-            {error && <span>{error}</span>}
+            {error && <span  className="text-danger">{error}</span>}
             <FormGroup className="my-3">
                 <FormLabel >Name</FormLabel>
                 <FormControl required={true} onChange={handleChange} name="name" value={userInfo.name}  placeholder="Your name"></FormControl>

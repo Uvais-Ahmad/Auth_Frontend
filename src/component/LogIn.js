@@ -33,7 +33,7 @@ function LogIn (props){
 
             props.handleUser(user);
 
-            navigate('/get-order');
+            navigate('/add-order');
             // await setUserInfo({
             //     phone:"",password:""
             // });
