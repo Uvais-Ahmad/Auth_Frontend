@@ -1,12 +1,12 @@
 import NavBar from './NavBar';
 
 // This component known as a CONTROLLED COMPONENT
-function Home (){
+function Home (props){
    
 
     return (
         <>
-          <NavBar />
+          <NavBar user = {props.user}/>
         </>
     );
 }

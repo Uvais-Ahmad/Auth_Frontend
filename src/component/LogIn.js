@@ -5,7 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 // This component known as a CONTROLLED COMPONENT
-function LogIn (){
+function LogIn (props){
 
     const [userInfo , setUserInfo] = useState({
         phone:"",password:""
@@ -31,13 +31,15 @@ function LogIn (){
 
             console.log("User response ",user);
 
-            navigate('/');
+            props.handleUser(user);
+
+            navigate('/get-order');
             // await setUserInfo({
             //     phone:"",password:""
             // });
         }
         catch(err){
-            console.log("Error while login ",err.response.data)
+            console.log("Error while login ",err)
         } 
     }    
 
