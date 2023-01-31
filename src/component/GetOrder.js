@@ -44,8 +44,10 @@ function GetOrder (props){
         <>
             <h1>GetOrder list </h1>
             {error && <span  className="text-danger">{error}</span>}
+            {!orders && <h3 style={{color:'navy'}}>Loading...</h3>}
 
             {
+                
                 orders && orders.map( (order) => {
                         return(
                             <Card style={{ width: '18rem' }} key={order._id}>

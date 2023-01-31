@@ -7,6 +7,7 @@ function AddOrder (){
         sub_total :"", phone : ""
     })
 
+    const [status , setStatus] = useState(false);
     const [error , setError] = useState("");
 
     function handleChange(e){
@@ -26,9 +27,12 @@ function AddOrder (){
             let headers = {'authentication' :token}
             
             let orders = await axios.post(url,order,{headers});
+            
+            setStatus(false);
             setOrder({
                 sub_total :"", phone : ""
             })
+            
         }
         catch(err){
             console.log("Error while adding order ",err);
@@ -44,7 +48,10 @@ function AddOrder (){
     }
 
     return (
-        <>
+        <>  
+            {
+                status && <h1 style={{textAlign:'center',color:'blueviolet'}}>Loading......</h1>
+            }
             <Form className="Form p-5 mx-auto" onSubmit={handleSubmit}>
                 <h3 style={{textAlign:'center'}}>New Order</h3>
                 {error && <span  className="text-danger">{error}</span>}
@@ -58,7 +65,7 @@ function AddOrder (){
                     <FormControl required={true} name="phone" onChange={handleChange} value={order.phone} placeholder="Your phone number"></FormControl>
                 </FormGroup>
                 
-                <Button className="w-100 bg-dark" type="submit" onClick={()=>setError("")}>Add Order</Button>
+                <Button className="w-100 bg-dark" type="submit" onClick={()=>{setError("");setStatus(true)}}>Add Order</Button>
             </Form>
         </>
     )

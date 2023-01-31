@@ -8,6 +8,9 @@ function Register () {
         name:"",phone:"",password:"",confirm_password:""
     })
 
+
+    const [status , setStatus] = useState(false);
+
     const navigate = useNavigate();
     const [error , setError] = useState("");
     
@@ -21,12 +24,9 @@ function Register () {
         
         try{
             e.preventDefault();
-            console.log("user info ",userInfo);
             let url = 'https://mernauth.onrender.com/api/v1/add-user';
-
             let user = await axios.post(url,userInfo);
-            console.log("User response ",user);
-
+            console.log("user signup ",user);
             navigate('/login-user');
             
         }
@@ -44,31 +44,34 @@ function Register () {
 
     return (
         <>
+            {
+                status && <h1 style={{textAlign:'center',color:'blueviolet'}}>Loading......</h1>
+            }
         <Form className="Form h-75 px-5 py-3 mx-auto" onSubmit={handleSubmit}>
             <h1 style={{textAlign:'center'}}>Register</h1>
 
             {error && <span  className="text-danger">{error}</span>}
             <FormGroup className="my-3">
                 <FormLabel >Name</FormLabel>
-                <FormControl required={true} onChange={handleChange} name="name" value={userInfo.name}  placeholder="Your name"></FormControl>
+                <FormControl type="text" required={true} onChange={handleChange} name="name" value={userInfo.name}  placeholder="Your name"></FormControl>
             </FormGroup>
 
             <FormGroup className="my-3">
                 <FormLabel >Phone</FormLabel>
-                <FormControl required={true} onChange={handleChange} name="phone" value={userInfo.phone}  placeholder="Your new phone number" ></FormControl>
+                <FormControl type="text" required={true} onChange={handleChange} name="phone" value={userInfo.phone}  placeholder="Your new phone number" ></FormControl>
             </FormGroup>
 
             <FormGroup className="my-3">
                 <FormLabel >Password</FormLabel>
-                <FormControl required={true} onChange={handleChange} name="password" value={userInfo.password}  placeholder="Password"></FormControl>
+                <FormControl type="password" required={true} onChange={handleChange} name="password" value={userInfo.password}  placeholder="Password"></FormControl>
             </FormGroup>
 
             <FormGroup className="my-3">
                 <FormLabel >Confirm Password</FormLabel>
-                <FormControl required={true} onChange={handleChange} name="confirm_password" value={userInfo.confirm_password}  placeholder="Confirm password" ></FormControl>
+                <FormControl type="password" required={true} onChange={handleChange} name="confirm_password" value={userInfo.confirm_password}  placeholder="Confirm password" ></FormControl>
             </FormGroup>
 
-            <Button style={{backgroundColor:'#090938',fontWeight:'bolder'}} className="w-100 mb-2" type="submit" >Register</Button>
+            <Button onClick={()=>setStatus(true)}  style={{backgroundColor:'#090938',fontWeight:'bolder'}} className="w-100 mb-2" type="submit" >Register</Button>
             
         </Form>
         </>
