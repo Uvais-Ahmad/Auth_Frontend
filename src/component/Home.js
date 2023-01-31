@@ -6,7 +6,7 @@ function Home (props){
 
     return (
         <>
-          <NavBar user = {props.user}/>
+          <NavBar user = {props.user}  handleUser = {props.handleUser}/>
         </>
     );
 }

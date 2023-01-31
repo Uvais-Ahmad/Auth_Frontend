@@ -10,13 +10,22 @@ function GetOrder (props){
 
     const [error , setError] = useState("");
 
-    useEffect(getData);
-
+    // useEffect(getData);
+    getData();
     async function getData (){
         try{
+            const id = localStorage.getItem('id'); 
+            const token = localStorage.getItem('access');
+         
+            let headers = {'authentication' :token}
             let url = `https://mernauth.onrender.com/api/v1/get-order/${id}`;
-            let ordersRes = await axios.get(url);
+
+            let ordersRes = await axios.get(url,{headers});
             console.log("Orders ",ordersRes);
+
+            let orderList = ordersRes.data.data.orders;
+            console.log(orderList)
+            setOrders(orderList);
         }
         catch(err){
             console.log("Error while get  ",err);
@@ -35,12 +44,26 @@ function GetOrder (props){
         <>
             <h1>GetOrder list </h1>
             {error && <span  className="text-danger">{error}</span>}
-            <Card style={{ width: '18rem' }}>
+
+            {
+                orders && orders.map( (order) => {
+                        return(
+                            <Card style={{ width: '18rem' }} key={order._id}>
+                                <Card.Body>
+                                    <Card.Title className='text-info'>{order.sub_total}</Card.Title>
+                                    <Card.Subtitle className="mb-2 text-secondary">{order.phone}</Card.Subtitle>
+                                </Card.Body>
+                            </Card>
+                        )
+                })
+            }
+
+            {/* <Card style={{ width: '18rem' }}>
                 <Card.Body>
                     <Card.Title className='text-info'>Card Title</Card.Title>
                     <Card.Subtitle className="mb-2 text-secondary">Card Subtitle</Card.Subtitle>
                 </Card.Body>
-            </Card>
+            </Card> */}
         </>
     )
 }

@@ -1,9 +1,13 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Container, Nav, Navbar} from 'react-bootstrap'
+
 import './NavBar.css';
 function NavvBar(props) {
 
+    const navigate = useNavigate();
+
     let user = props.user;
+    let setUser = props.handleUser;
     let url ='';
     if(user){
         url = `/get-order/${user.data.data.id}`;
@@ -21,6 +25,13 @@ function NavvBar(props) {
                                 <NavLink className="m-1" to=''>{user.data.data.name}</NavLink>
                                 <NavLink className="m-1" to='/add-order'>Add Order</NavLink>
                                 <NavLink className="m-1" to= {url} >All Orders</NavLink>
+                                <NavLink className="m-1" onClick={()=>{
+                                    localStorage.removeItem("access");
+                                    localStorage.removeItem("id");
+                                    setUser("");
+                                    navigate('/login-user');
+                                    
+                                }}>Logout</NavLink>
                             </Nav>
                                     :
                             <Nav className="me-auto">

@@ -19,17 +19,19 @@ function AddOrder (){
     async function handleSubmit(e){
         try{
 
-        
             e.preventDefault();
-            console.log("order Info ",order);
-
             let url = 'https://mernauth.onrender.com/api/v1/add-order';
-            let orders = await axios.post(url,order);
-            console.log("order response ",orders);
-
+            const token = localStorage.getItem('access');
+         
+            let headers = {'authentication' :token}
+            
+            let orders = await axios.post(url,order,{headers});
+            setOrder({
+                sub_total :"", phone : ""
+            })
         }
         catch(err){
-            console.log("Error while POST req ",err);
+            console.log("Error while adding order ",err);
             if(
                 err.response && 
                 err.response.status >=400 && 
@@ -56,7 +58,7 @@ function AddOrder (){
                     <FormControl required={true} name="phone" onChange={handleChange} value={order.phone} placeholder="Your phone number"></FormControl>
                 </FormGroup>
                 
-                <Button className="w-100 bg-dark" type="submit">Add Order</Button>
+                <Button className="w-100 bg-dark" type="submit" onClick={()=>setError("")}>Add Order</Button>
             </Form>
         </>
     )
