@@ -7,15 +7,19 @@ import { useNavigate } from "react-router-dom";
 // This component known as a CONTROLLED COMPONENT
 function LogIn (props){
 
+    //State object
     const [userInfo , setUserInfo] = useState({
         phone:"",password:""
     })
 
+    //to show error and Loading
     const [status , setStatus] = useState(false);
     const [error , setError] = useState();
 
+    //after sucessfull login to naviagte another path
     const navigate = useNavigate();
 
+    //handle onChange input field
     function handleChange(e){
         const name = e.target.name;
         const value = e.target.value;
@@ -38,10 +42,11 @@ function LogIn (props){
             const token = user.data.data.access_token;
             const id = user.data.data.id;
 
-
+            //set JWT tokem in LocalStorage
             localStorage.setItem("access",token);
             localStorage.setItem("id",id)
 
+            // set Logged In use in state its define in App Component
             props.handleUser(user);
 
             navigate('/add-order');
@@ -80,7 +85,7 @@ function LogIn (props){
                 </FormGroup>
 
                 <Button onClick={()=>setStatus(true)}  style={{backgroundColor:'#090938',fontWeight:'bolder'}}  className="w-100 mb-1" type="submit" >Log In</Button>
-                <FormText ><a href="/">Forgot Password ?</a></FormText>
+                
             </Form>
         </>
     );

@@ -23,7 +23,7 @@ function AddOrder (){
             e.preventDefault();
             let url = 'https://mernauth.onrender.com/api/v1/add-order';
             const token = localStorage.getItem('access');
-         
+            //set JWT token in Headers
             let headers = {'authentication' :token}
             
             let orders = await axios.post(url,order,{headers});

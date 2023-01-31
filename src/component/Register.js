@@ -58,7 +58,7 @@ function Register () {
 
             <FormGroup className="my-3">
                 <FormLabel >Phone</FormLabel>
-                <FormControl type="text" required={true} onChange={handleChange} name="phone" value={userInfo.phone}  placeholder="Your new phone number" ></FormControl>
+                <FormControl type="text" required={true} onChange={handleChange} name="phone" value={userInfo.phone}  placeholder="Must be min 10 digit" ></FormControl>
             </FormGroup>
 
             <FormGroup className="my-3">

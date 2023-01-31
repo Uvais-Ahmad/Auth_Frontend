@@ -50,7 +50,7 @@ function GetOrder (props){
                 
                 orders && orders.map( (order) => {
                         return(
-                            <Card style={{ width: '18rem' }} key={order._id}>
+                            <Card style={{ width: '18rem', margin:'10px' }} key={order._id}>
                                 <Card.Body>
                                     <Card.Title className='text-info'>{order.sub_total}</Card.Title>
                                     <Card.Subtitle className="mb-2 text-secondary">{order.phone}</Card.Subtitle>
@@ -60,12 +60,6 @@ function GetOrder (props){
                 })
             }
 
-            {/* <Card style={{ width: '18rem' }}>
-                <Card.Body>
-                    <Card.Title className='text-info'>Card Title</Card.Title>
-                    <Card.Subtitle className="mb-2 text-secondary">Card Subtitle</Card.Subtitle>
-                </Card.Body>
-            </Card> */}
         </>
     )
 }
