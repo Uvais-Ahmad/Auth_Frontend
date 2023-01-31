@@ -21,10 +21,10 @@ function GetOrder (props){
             let url = `https://mernauth.onrender.com/api/v1/get-order/${id}`;
 
             let ordersRes = await axios.get(url,{headers});
-            console.log("Orders ",ordersRes);
+            
 
             let orderList = ordersRes.data.data.orders;
-            console.log(orderList)
+            
             setOrders(orderList);
         }
         catch(err){

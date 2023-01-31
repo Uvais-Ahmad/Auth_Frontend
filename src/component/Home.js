@@ -6,7 +6,8 @@ function Home (props){
 
     return (
         <>
-          <NavBar user = {props.user}  handleUser = {props.handleUser}/>
+          {/* <NavBar user = {props.user}  handleUser = {props.handleUser}/> */}
+          {props.user && <h1 style={{color:'darkgrey',fontFamily:'sans-serif',margin:'20px'}}>Welcome , {props.user.data.data.name}</h1>}
         </>
     );
 }

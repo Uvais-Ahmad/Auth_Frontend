@@ -26,7 +26,7 @@ function Register () {
             e.preventDefault();
             let url = 'https://mernauth.onrender.com/api/v1/add-user';
             let user = await axios.post(url,userInfo);
-            console.log("user signup ",user);
+            
             navigate('/login-user');
             
         }

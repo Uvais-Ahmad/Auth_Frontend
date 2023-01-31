@@ -49,7 +49,7 @@ function LogIn (props){
             // set Logged In use in state its define in App Component
             props.handleUser(user);
 
-            navigate('/add-order');
+            navigate('/');
             
         }
         catch(err){

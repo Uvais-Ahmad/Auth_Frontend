@@ -13,7 +13,6 @@ function NavvBar(props) {
         url = `/get-order/${user.data.data.id}`;
     }
 
-    console.log("User in Navbar ",user);
     return(
         <>
             <Navbar bg="dark" variant="dark">
