@@ -7,6 +7,7 @@ import AddOrder from './component/AddOrder';
 import { useEffect, useState } from 'react';
 import GetOrder from './component/GetOrder';
 import NavvBar from './component/NavBar';
+import Protected from './component/Protected';
 
 function App() {
 
@@ -22,7 +23,7 @@ function App() {
       <BrowserRouter >
       <NavvBar user = {user}  handleUser = {setUser}/>
         <Routes>
-          <Route path='/' element={ user? <Home user={user} handleUser = {setUser}/> : <Navigate to='/login-user' /> } />
+          <Route path='/' element={ <Protected Component={Home} user={user} handleUser = {setUser}/>} />
           <Route path='/login-user' element={ <LogIn handleUser = {setUser}/> }/>
           <Route path='/add-user' element={ <Register /> }/>
           <Route path='/add-order' element={user ? <AddOrder user = {user}/> : <Navigate to='/login-user'/> }/>
