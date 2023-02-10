@@ -8,10 +8,7 @@ function NavvBar(props) {
 
     let user = props.user;
     let setUser = props.handleUser;
-    let url ='';
-    if(user){
-        url = `/get-order/${user.data.data.id}`;
-    }
+    
 
     return(
         <>
@@ -23,7 +20,7 @@ function NavvBar(props) {
                             <Nav>
                                 <NavLink className="m-1" to=''>{user.data.data.name}</NavLink>
                                 <NavLink className="m-1" to='/add-order'>Add Order</NavLink>
-                                <NavLink className="m-1" to= {url} >All Orders</NavLink>
+                                <NavLink className="m-1" to= '/CART' >Cart</NavLink>
                                 <NavLink className="m-1" onClick={()=>{
                                     localStorage.removeItem("access");
                                     localStorage.removeItem("id");
