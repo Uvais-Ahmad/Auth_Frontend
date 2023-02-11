@@ -1,6 +1,12 @@
+import './Bucket.css';
+
 function Bucket (props) {
     console.log("Bucket ",props)
     const {cartItem  , handleCart , removeCart} = props;
+    let itemPrice = cartItem.reduce( (a , c )=> a+c.price*c.qty , 0);
+    let taxPrice = itemPrice*0.14;
+    let shippingPrice = itemPrice > 2000 ? 0 : 50;
+    let totalPrice = itemPrice + taxPrice + shippingPrice;
     return (
         <>
             <h1 style={style}>Cart Item</h1>
@@ -17,6 +23,30 @@ function Bucket (props) {
                     </div>
                 </div>
             ))}
+
+            {
+                cartItem.length !== 0 && (
+                    <>
+                    <hr></hr>
+                    <div className='row'>
+                        <div className='col-2'>Item Price</div>
+                        <div className='col-1 text-right'>{itemPrice.toFixed(2)}</div>
+                    </div>
+                    <div className='row'>
+                        <div className='col-2'>Tax Price</div>
+                        <div className='col-1 text-right'>{taxPrice.toFixed(2)}</div>
+                    </div>
+                    <div className='row'>
+                        <div className='col-2'>Shipping Price</div>
+                        <div className='col-1 text-right'>{shippingPrice.toFixed(2)}</div>
+                    </div>
+                    <div className='row'>
+                        <div className='col-2'>Total Price </div>
+                        <div className='col-1 text-right fw-bolder'>{totalPrice.toFixed(2)}</div>
+                    </div>
+                    </>
+                )
+            }
         </>
     )
 }

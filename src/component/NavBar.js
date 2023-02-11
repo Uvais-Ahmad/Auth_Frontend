@@ -5,7 +5,7 @@ import './NavBar.css';
 function NavvBar(props) {
 
     const navigate = useNavigate();
-
+    const {countCartItem} = props;
     let user = props.user;
     let setUser = props.handleUser;
     
@@ -20,7 +20,8 @@ function NavvBar(props) {
                             <Nav>
                                 <NavLink className="m-1" to=''>{user.data.data.name}</NavLink>
                                 <NavLink className="m-1" to='/add-order'>Add Order</NavLink>
-                                <NavLink className="m-1" to= '/CART' >Cart</NavLink>
+                                <NavLink className="m-1" to= '/CART' >Cart{countCartItem!==0 &&
+                                                                             <span style={countStyle}>{countCartItem}</span>}</NavLink>
                                 <NavLink className="m-1" onClick={()=>{
                                     localStorage.removeItem("access");
                                     localStorage.removeItem("id");
@@ -40,6 +41,13 @@ function NavvBar(props) {
             </Navbar>
         </>
     )
+
+    const countStyle = {backgroundColor:'lightblue',
+                            color:'black',
+                            borderRadius:'10px',
+                            margin:'auto 3px', 
+                            padding:'0 10px'
+                        }
 }
 
 export default NavvBar;

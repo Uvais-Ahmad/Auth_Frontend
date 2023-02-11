@@ -54,7 +54,7 @@ function App() {
     <div className="App">
       
       <BrowserRouter >
-      <NavvBar user = {user}  handleUser = {setUser}/>
+      <NavvBar user = {user}  handleUser = {setUser} countCartItem = {cartItem.length}/>
         <Routes>
           <Route path='/' element={ <Protected Component={Product} user={user} handleCart={handleAddToCart}/>} />
           <Route path='/login-user' element={ <LogIn handleUser = {setUser}/> }/>

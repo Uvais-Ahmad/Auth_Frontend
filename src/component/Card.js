@@ -2,7 +2,7 @@ import './Product.css';
 function Card (props){
     return(
         <>
-            <div keys   ={props.key} className="productCard">
+            <div key ={props.key} className="productCard">
                 <div className="productCard_header">
                 <img src={props.image} alt='product-img' className="productCard_img" />
                 </div>
