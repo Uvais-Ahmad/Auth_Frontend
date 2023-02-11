@@ -3,7 +3,6 @@ import './App.css';
 import LogIn from './component/LogIn';
 import Register from './component/Register';
 import { useState } from 'react';
-import AddOrder from './component/AddOrder';
 import NavvBar from './component/NavBar';
 import Protected from './component/Protected';
 import Product from './component/Product';
@@ -58,10 +57,10 @@ function App() {
       <BrowserRouter >
       <NavvBar user = {user}  handleUser = {setUser} countCartItem = {cartItem.length}/>
         <Routes>
-          <Route path='/' element={ <Protected Component={Product} handleCart={handleAddToCart}/>} />
+          <Route path='/' element={ <Protected Component={Product} user={user} handleCart={handleAddToCart}/>} />
           <Route path='/login-user' element={ <LogIn handleUser = {setUser}/> }/>
           <Route path='/add-user' element={ <Register /> }/>
-          <Route path='/add-order' element={user ? <AddOrder user = {user}/> : <Navigate to='/login-user'/> }/>
+          
           <Route path='/CART' element={user ? <Bucket handleCheckout={handleCheckout} checkout={checkoutItems} setCheckout = {setCheckout}  user={user} cartItem={cartItem} handleCart={handleAddToCart} removeCart={handleRemoveCart}/> : <Navigate to='/login-user'/>}/>
           <Route path='/checkout' element={user ? <Checkout checkout={checkoutItems} setCheckout = {setCheckout} user = {user}/> : <Navigate to='/login-user'/> }/>
         </Routes>
