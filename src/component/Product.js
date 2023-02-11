@@ -2,12 +2,11 @@ import Card from './Card';
 import './Product.css';
 import productData from '../content';
 function Product(props) {
-    console.log("Props in product : ",props)
     return(
         <div className="productCard_List">
             {
                 productData.map( product=>{
-                    return <Card welcome={'nameis Uvais'}
+                    return <Card 
                     keys={product.id}
                     image={product.image}
                     name={product.name}
