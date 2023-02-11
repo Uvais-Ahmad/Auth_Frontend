@@ -1,3 +1,23 @@
 body{
     color: white !important;
 }
+.tableImg{
+    height: 60px;
+    width: 60px;
+}
+.qty{
+    margin: auto 15px;
+}
+table{
+    vertical-align: middle !important;
+    background-color: #195179;
+    border-color: black !important;
+    color: #02080e !important;
+    margin-top: 3vh;
+}
+.add, .remove{
+    border-radius: 5px;
+}
+.checkout{
+    margin: 10px;
+}

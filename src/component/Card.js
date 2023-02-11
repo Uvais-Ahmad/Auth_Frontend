@@ -9,12 +9,12 @@ function Card (props){
                 
                 
                 <div className="productCard_details">
-                    <h4 className="productName">{props.name}</h4>
+                    <h5 className="productName">{props.name}</h5>
                     <div className="productCard_priceStack">
-                        <h5 className="price">{props.price} Rs</h5>
+                        <h2 className="price">{props.price} Rs</h2>
                         <p className="sales">{props.totalSales} units sold</p>
                     </div>
-                    <p className="productCard_rating">{props.rating} star</p>
+                    <div className="productCard_rating">Rating : {props.rating} star</div>
 
                 </div>
                 <button type='submit' onClick={()=>props.handleCart(props)}>Add To Cart</button>
