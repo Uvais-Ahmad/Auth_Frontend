@@ -2,11 +2,12 @@ import Card from './Card';
 import './Product.css';
 import productData from '../content';
 function Product(props) {
+    let i =0;
     return(
         <div className="productCard_List">
             {
                 productData.map( product=>{
-                    return <Card 
+                    return <Card key={i++}
                     keys={product.id}
                     image={product.image}
                     name={product.name}

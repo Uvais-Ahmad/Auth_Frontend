@@ -1,8 +1,9 @@
 import './Product.css';
 function Card (props){
+    let i=0
     return(
         <>
-            <div key ={props.key} className="productCard">
+            <div key ={i++} className="productCard">
                 <div className="productCard_header">
                 <img src={props.image} alt='product-img' className="productCard_img" />
                 </div>

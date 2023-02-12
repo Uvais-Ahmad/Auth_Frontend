@@ -8,7 +8,7 @@ function Bucket (props) {
     let taxPrice = itemPrice*0.14;
     let shippingPrice = itemPrice > 2000 ? 0 : 50;
     let totalPrice = itemPrice + taxPrice + shippingPrice;
-
+    let i=0;
 
 
     return (
@@ -39,7 +39,7 @@ function Bucket (props) {
                 </thead>
                 <tbody>
                     {cartItem.map( item => (
-                        <tr>
+                        <tr key={i++}>
                             <td>{item.keys}</td>
                         <td><img className='tableImg' src={item.image} alt="itemImg" /></td>
                         <td>{item.name}</td>
