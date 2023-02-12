@@ -1,4 +1,3 @@
-import axios from 'axios';
 import './Bucket.css';
 import Table from 'react-bootstrap/Table';
 
@@ -90,7 +89,4 @@ function Bucket (props) {
     )
 }
 
-const style = {
-    color:'white'
-}
 export default Bucket;

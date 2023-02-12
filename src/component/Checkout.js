@@ -1,5 +1,5 @@
 function Checkout(props){
-    const {checkout , setCheckout} = props;
+    const {checkout} = props;
     console.log("Checkout in checkout ",checkout)
     let i=0;
     return (
