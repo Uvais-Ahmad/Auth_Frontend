@@ -20,7 +20,7 @@ function NavvBar(props) {
                             <Nav>
                                 <NavLink className="m-1" to=''>{user.data.data.name}</NavLink>
 
-                                <NavLink className="m-1" to='/checkout'>Checkout</NavLink>
+                                <NavLink className="m-1" to='/checkout'>My Orders</NavLink>
                                 
                                 <NavLink className="m-1" to= '/CART' >Cart{countCartItem!==0 &&
                                                                              <span style={countStyle}>{countCartItem}</span>}</NavLink>

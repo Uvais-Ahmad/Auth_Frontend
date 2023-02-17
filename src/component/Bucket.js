@@ -50,20 +50,20 @@ function Bucket (props) {
                 cartItem.length !== 0 && (
                     <div className='checkout'>
                     <hr></hr>
-                    <div className='row'>
+                    <div className='row fs-5'>
                         <div className='col-2'>Item Price</div>
                         <div className='col-1 text-right'>{itemPrice.toFixed(2)}</div>
                     </div>
-                    <div className='row'>
+                    <div className='row fs-5'>
                         <div className='col-2'>Discount 20%</div>
                         <div className='col-1 text-right'>{discount.toFixed(2)}</div>
                     </div>
 
-                    <div className='row'>
+                    <div className='row fs-5'>
                         <div className='col-2'>Amount </div>
                         <div className='col-1 text-right'>{amount.toFixed(2)}</div>
                     </div>
-                    <div className='row'>
+                    <div className='row fs-5'>
                         <div className='col-2'>Tax Price</div>
                         <div className='col-1 text-right'>{taxPrice.toFixed(2)}</div>
                     </div>
@@ -75,7 +75,7 @@ function Bucket (props) {
                     </div>
                     
                     <div className='row'>
-                        <button className='btn btn-success w-25' onClick={()=>handleCheckout()}>Checkout</button>
+                        <button className='btn btn-success w-25 fs-5 fw-bold' onClick={()=>handleCheckout()}>Checkout</button>
                     </div>
                     </div>
                 )

@@ -10,10 +10,11 @@ body{
 }
 table{
     vertical-align: middle !important;
-    background-color: #195179;
+    background-color: #5782a0;
     border-color: black !important;
     color: #02080e !important;
     margin-top: 3vh;
+    font-weight: bolder;
 }
 .add, .remove{
     border-radius: 5px;

@@ -28,10 +28,25 @@ function Card (props){
         try{
             await axios.post('http://localhost:8000/api/v1/getInvoice',props);
             console.log("Pdf created we call via axios");
+            await downloadInvoicee();
         }
         catch(err){
             if(err){
                 console.log("Error occur while invoice ",err);
+            }
+        }
+        
+    }
+
+
+    async function downloadInvoicee(){
+        try{
+            await axios.get('http://localhost:8000/api/v1/downloadInvoice');
+            console.log("Pdf dowbload we call via axios");
+        }
+        catch(err){
+            if(err){
+                console.log("Error occur while download invoice ",err);
             }
         }
         

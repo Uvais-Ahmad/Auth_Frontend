@@ -15,6 +15,9 @@ function Checkout(props){
             await axios.post('http://localhost:8000/api/v1/getInvoice',data);
             console.log("Pdf created we call via axios");
             setMsg("Generated successfully");
+
+            await axios.get('http://localhost:8000/api/v1/downloadInvoice');
+            setMsg("Download Api called");
             setTimeout(() => {
                 setMsg("")
             }, 2000);
