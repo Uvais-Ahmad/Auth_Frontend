@@ -13,18 +13,6 @@ function Bucket (props) {
 
     return (
         <>
-            {/* {cartItem.map( item => (
-                <div key={item.keys} className="row text-white" >
-                    <div className="col-2">{item.name}</div>
-                    <div className="col-2">
-                        <button onClick={()=>handleCart(item)} className="add">+</button>
-                        <button onClick={()=>removeCart(item)} className="remove">-</button>
-                    </div>
-                    <div className="col-2 text-right">
-                        {item.qty } x {item.price.toFixed(2)}
-                    </div>
-                </div>
-            ))} */}
             {cartItem.length === 0 && <h2 style={{color:'lightgrey',textAlign:'center',marginTop:'5vh'}}>Empty , no item added</h2>} 
             {cartItem.length !== 0 && <Table  bordered  className='w-75 mx-auto'>
                 <thead>

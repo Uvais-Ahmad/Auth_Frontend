@@ -11,7 +11,7 @@ function Card (props){
             alert('order successfull added')
             console.log("Order ",order);
             
-            await handleBut();
+            await getInvoice();
         }
         catch(err){
             console.log("Error while order product req ",err);
@@ -25,7 +25,7 @@ function Card (props){
         }
     }
 
-    async function handleBut(){
+    async function getInvoice(){
         try{
             await axios.post('http://localhost:8000/api/v1/getInvoice',props);
             console.log("Pdf created we call via axios");

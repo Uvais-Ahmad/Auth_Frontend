@@ -6,7 +6,6 @@ import { useState } from 'react';
 import NavvBar from './component/NavBar';
 import Protected from './component/Protected';
 import Product from './component/Product';
-import productData from './content';
 import Bucket from './component/Bucket';
 import Checkout from './component/Checkout';
 import axios from 'axios';
