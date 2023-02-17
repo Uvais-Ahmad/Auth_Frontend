@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Protected (props) {
-    let {Component , user , handleCart} = props;
+    let {Component , user , handleCart,removeCart} = props;
     let navigate = useNavigate();
     //Each time we check
     useEffect(()=>{
@@ -11,7 +11,7 @@ function Protected (props) {
 
     return (
         <>
-        <Component user={user} handleCart = {handleCart}/>
+        <Component user={user} handleCart = {handleCart} removeCart ={removeCart}/>
         </>
     )
 }

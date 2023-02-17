@@ -17,6 +17,7 @@ function Product(props) {
                     Unit={product.Unit}
                     image = {product.image}
                     handleCart = {props.handleCart}
+                    removeCart = {props.removeCart}
                      />
                 })
             }

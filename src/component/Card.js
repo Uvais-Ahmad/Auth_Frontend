@@ -2,7 +2,6 @@ import './Product.css';
 import axios from 'axios';
 function Card (props){
     let i=0
-
     async function orderProduct(e){
         try{
             e.preventDefault();
@@ -48,7 +47,13 @@ function Card (props){
                     <h5 className="productName">{props.SysListName}</h5>
                     <div className="productCard_priceStack">
                         <h2 className="price">{props.MRP} Rs</h2>
-                        <p className="sales">{12+i*2} units sold</p>
+                        {/* <span>
+                            <button onClick={()=>props.handleCart(props)} className="add">+</button>
+                            <span className='qty'>
+                                {props.Unit}
+                            </span>
+                            <button onClick={()=>props.removeCart(props)} className="remove">-</button>
+                        </span> */}
                     </div>
                 </div>
                 <button type='submit' className='addToCartBtn' onClick={()=>props.handleCart(props)}>Add To Cart</button>

@@ -19,6 +19,8 @@ function App() {
   //add to cart from product
   function handleAddToCart(product){
 
+    console.log("HandleAddTocart",product)
+
     let productExist = cartItem.find(item => item.keys === product.keys)
     if(productExist){
       //we increse the qty of existing product
@@ -34,8 +36,10 @@ function App() {
   }
   // remove a particular cart item
   function handleRemoveCart(product){
+    console.log("Handleremovecart",product)
     let productExist = cartItem.find(item => item.keys === product.keys)
     //it means now we should remove from cart
+    console.log("Exist ",productExist)
     if(productExist.Unit === 1){
       setCartItem(cartItem.filter(item=> item.keys !== product.keys))
     }
@@ -77,7 +81,7 @@ function App() {
       <BrowserRouter >
       <NavvBar user = {user}  handleUser = {setUser} countCartItem = {cartItem.length}/>
         <Routes>
-          <Route path='/' element={ <Protected Component={Product} user={user} handleCart={handleAddToCart}/>} />
+          <Route path='/' element={ <Protected Component={Product} user={user} handleCart={handleAddToCart} removeCart={handleRemoveCart}/>} />
           <Route path='/login-user' element={ <LogIn handleUser = {setUser}/> }/>
           <Route path='/add-user' element={ <Register /> }/>
           
