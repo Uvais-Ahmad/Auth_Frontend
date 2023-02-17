@@ -4,9 +4,7 @@ import { useState } from "react";
 
 function Checkout(props){
     const {checkout} = props;
-    console.log("Checkout in checkout ",checkout)
     let i=0;
-
     const [msg , setMsg] = useState("");
 
     async function getInvoice(data){
@@ -16,8 +14,25 @@ function Checkout(props){
             console.log("Pdf created we call via axios");
             setMsg("Generated successfully");
 
-            await axios.get('http://localhost:8000/api/v1/downloadInvoice');
-            setMsg("Download Api called");
+            // const apiUrl = 'http://localhost:8000/api/v1/downloadInvoice';
+            // axios.get(apiUrl , {
+            //     responseType:'blob',
+            //     headers:{
+            //         'Accept':'application/pdf'
+            //     }
+            // }).then(res =>{
+            //     const fn = 'my.pdf';
+            //     const blobObj = new Blob([res.data],{type:'application/pdf'});
+            //     console.log("ObjBlob ",blobObj);
+            //     const anchorLink = document.createElement('a');
+            //     anchorLink.href = window.URL.createObjectURL(blobObj);
+            //     setMsg("Fetching...");
+            //     console.log("ANchrlink ",anchorLink);
+            //     anchorLink.setAttribute('download',fn);
+            //     anchorLink.click();
+            // })
+            await downloadInvoice();
+
             setTimeout(() => {
                 setMsg("")
             }, 2000);
@@ -35,6 +50,25 @@ function Checkout(props){
     }
 
 
+    async function downloadInvoice(){
+        setMsg("Fetching Invoice...");
+        const apiUrl = 'http://localhost:8000/api/v1/downloadInvoice';
+        let response = await axios.get(apiUrl , {
+                            responseType:'blob',
+                            headers:{
+                                'Accept':'application/pdf'
+                            }
+                        });
+        const fileName = 'Invoice.pdf';
+        const blobObj = new Blob([response.data],{type:'application/pdf'});
+        const anchorLink = await document.createElement('a');
+        anchorLink.href = await window.URL.createObjectURL(blobObj);
+        
+        await anchorLink.setAttribute('download',fileName);
+        anchorLink.click();
+        setMsg("Downloaded");
+    }
+
     return (
         <>
         {checkout.length === 0 && <h1 className="text-info mx-auto text-secondary">No order yet</h1> }
@@ -43,7 +77,6 @@ function Checkout(props){
                 
                 <div key={i++} className='mt-3 ms-2 p-3 shadow' style={{width:'50vw',backgroundColor:'#073980',borderRadius:'10px'}}> 
                     <h2 style={{}} className='text-info' key={i++}>~{props.user.data.data.name}</h2>
-                    {console.log("Item in react ",item.cartItem)}
                     {item.cartItem.map(subItem => (
                         <div key={i++}>
                             <h6 className='ms-3 text-white'><span className='text-success fw-bolder'>Product Name : </span>{subItem.SysListName}<span className='text-success fw-bolder'> with Quantity :  </span>{subItem.Unit}</h6>
