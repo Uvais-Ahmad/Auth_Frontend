@@ -9,6 +9,7 @@ import Product from './component/Product';
 import productData from './content';
 import Bucket from './component/Bucket';
 import Checkout from './component/Checkout';
+import axios from 'axios';
 
 function App() {
   
@@ -45,10 +46,30 @@ function App() {
       )))
     }
   }
-  //add all cartItem to checkout item
+  //add all cartItem to checkout item and Store all item in Database
   async function handleCheckout(){
-    await setCheckout([...checkoutItems,{cartItem:cartItem}]);
-    await setCartItem([]);  
+    //here we passs cart item for storign in database 
+    try{
+      let url = 'http://localhost:8000/api/v1/order'
+      let order = await axios.post(url,cartItem);
+      
+      console.log("Order ",order);
+      await setCheckout([...checkoutItems,{cartItem:cartItem}]);
+      await setCartItem([]); 
+      alert('order successfull added') 
+  }
+  catch(err){
+      console.log("Error while order product req ",err);
+      if(
+          err.response && 
+          err.response.status >=400 && 
+          err.response.status<=500
+          ){
+              console.log(err.response.data.message);
+          }
+  }
+
+    
 }
 
   return (

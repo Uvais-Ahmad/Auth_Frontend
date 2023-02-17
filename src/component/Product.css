@@ -41,7 +41,7 @@
     color: #2da175;
     font-weight: bolder;
 }
-.productCard>button{
+.addToCartBtn{
     background-color: #dedeeb;
     font-weight: bolder;
     border-radius: 4px;
@@ -54,7 +54,21 @@
     font-weight: 400;
 }
 
-.productCard>button:hover{
+.addToCartBtn:hover{
     background-color:#15163d ;
     color: #dedeeb;
+}
+
+.buyBtn{
+    /* background-color: #dedeeb; */
+    font-weight: bolder;
+    border-radius: 4px;
+    /* color: #8485df; */
+    width: 90%;
+    margin: 10px ;
+    transition: .5s;
+}
+
+.buyBtn:hover{
+    background-color: #2da175;
 }

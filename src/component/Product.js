@@ -8,13 +8,14 @@ function Product(props) {
             {
                 productData.map( product=>{
                     return <Card key={i++}
-                    keys={product.id}
-                    image={product.image}
-                    name={product.name}
-                    price={product.price}
-                    totalSales={product.totalSales}
-                    timeLeft={product.timeLeft}
-                    rating={product.rating}
+                    keys={product.keys}
+                    DSIN={product.DSIN}
+                    SysListName={product.SysListName}
+                    MRP={product.MRP}
+                    HSNCode={product.HSNCode}
+                    GSTSlab={product.GSTSlab}
+                    Unit={product.Unit}
+                    image = {product.image}
                     handleCart = {props.handleCart}
                      />
                 })
