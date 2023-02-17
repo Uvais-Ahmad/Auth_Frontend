@@ -8,6 +8,7 @@ function Product(props) {
             {
                 productData.map( product=>{
                     return <Card key={i++}
+                    downloadInvoice={props.downloadInvoice}
                     keys={product.keys}
                     DSIN={product.DSIN}
                     SysListName={product.SysListName}

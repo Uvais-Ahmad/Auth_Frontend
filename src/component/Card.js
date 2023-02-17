@@ -5,6 +5,8 @@ function Card (props){
     let i=0
     let [msg , setMsg] = useState("");
 
+    const {downloadInvoice} = props;
+
     async function orderProduct(e){
         try{
             e.preventDefault();
@@ -18,7 +20,7 @@ function Card (props){
                 setMsg("Generating Invoice...");
             }, 1000);
             await getInvoice();
-            setMsg("Invoice Generated");
+            await downloadInvoice();
             setTimeout(() => {
                 setMsg("");
             }, 2000);
@@ -39,8 +41,7 @@ function Card (props){
     async function getInvoice(){
         try{
             await axios.post('http://localhost:8000/api/v1/getInvoice',props);
-            console.log("Pdf created we call via axios");
-            await downloadInvoicee();
+            setMsg("Invoice Generated");
         }
         catch(err){
             if(err){
@@ -51,18 +52,7 @@ function Card (props){
     }
 
 
-    async function downloadInvoicee(){
-        try{
-            await axios.get('http://localhost:8000/api/v1/downloadInvoice');
-            console.log("Pdf dowbload we call via axios");
-        }
-        catch(err){
-            if(err){
-                console.log("Error occur while download invoice ",err);
-            }
-        }
-        
-    }
+
     return(
         <>
             <div key ={i++} className="productCard">

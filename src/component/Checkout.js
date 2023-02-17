@@ -6,31 +6,15 @@ function Checkout(props){
     const {checkout} = props;
     let i=0;
     const [msg , setMsg] = useState("");
+    const {downloadInvoice} = props
 
     async function getInvoice(data){
         try{ 
             setMsg("wait , pdf is generating")
             await axios.post('http://localhost:8000/api/v1/getInvoice',data);
-            console.log("Pdf created we call via axios");
+        
             setMsg("Generated successfully");
-
-            // const apiUrl = 'http://localhost:8000/api/v1/downloadInvoice';
-            // axios.get(apiUrl , {
-            //     responseType:'blob',
-            //     headers:{
-            //         'Accept':'application/pdf'
-            //     }
-            // }).then(res =>{
-            //     const fn = 'my.pdf';
-            //     const blobObj = new Blob([res.data],{type:'application/pdf'});
-            //     console.log("ObjBlob ",blobObj);
-            //     const anchorLink = document.createElement('a');
-            //     anchorLink.href = window.URL.createObjectURL(blobObj);
-            //     setMsg("Fetching...");
-            //     console.log("ANchrlink ",anchorLink);
-            //     anchorLink.setAttribute('download',fn);
-            //     anchorLink.click();
-            // })
+            
             await downloadInvoice();
 
             setTimeout(() => {
@@ -45,34 +29,34 @@ function Checkout(props){
                 }, 2000);
                 console.log("Error occur while invoice ",err);
             }
-        }
-        
+        }        
     }
 
 
-    async function downloadInvoice(){
-        setMsg("Fetching Invoice...");
-        const apiUrl = 'http://localhost:8000/api/v1/downloadInvoice';
-        let response = await axios.get(apiUrl , {
-                            responseType:'blob',
-                            headers:{
-                                'Accept':'application/pdf'
-                            }
-                        });
-        const fileName = 'Invoice.pdf';
-        const blobObj = new Blob([response.data],{type:'application/pdf'});
-        const anchorLink = await document.createElement('a');
-        anchorLink.href = await window.URL.createObjectURL(blobObj);
+    // async function downloadInvoice(){
+    //     setMsg("Fetching Invoice...");
+    //     const apiUrl = 'http://localhost:8000/api/v1/downloadInvoice';
+    //     let response = await axios.get(apiUrl , {
+    //                         responseType:'blob',
+    //                         headers:{
+    //                             'Accept':'application/pdf'
+    //                         }
+    //                     });
+    //     const fileName = 'Invoice.pdf';
+    //     const blobObj = new Blob([response.data],{type:'application/pdf'});
+    //     const anchorLink = await document.createElement('a');
+    //     anchorLink.href = await window.URL.createObjectURL(blobObj);
         
-        await anchorLink.setAttribute('download',fileName);
-        anchorLink.click();
-        setMsg("Downloaded");
-    }
+    //     await anchorLink.setAttribute('download',fileName);
+    //     anchorLink.click();
+    //     setMsg("Downloaded");
+    // }
 
     return (
         <>
         {checkout.length === 0 && <h1 className="text-info mx-auto text-secondary">No order yet</h1> }
-        {
+        <span className="text-warning fs-3 fw-bolder ms-3 ">{msg}</span>
+        {   
             checkout.map(item => (
                 
                 <div key={i++} className='mt-3 ms-2 p-3 shadow' style={{width:'50vw',backgroundColor:'#073980',borderRadius:'10px'}}> 
@@ -86,7 +70,6 @@ function Checkout(props){
                          
                     ))}
                    <Button onClick={()=>getInvoice(item.cartItem)}>Get Invoice</Button>
-                   <span className="text-warning fw-bolder ms-3 ">{msg}</span>
                 </div >
                 
             ))

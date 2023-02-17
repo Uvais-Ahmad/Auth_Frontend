@@ -56,7 +56,7 @@ function App() {
       let url = 'http://localhost:8000/api/v1/order'
       await axios.post(url,cartItem);
       setMsg("Checkout Success...");
-      
+      await downloadInvoice();
       await setCheckout([...checkoutItems,{cartItem:cartItem}]);
       await setCartItem([]); 
       setMsg("");
@@ -74,6 +74,29 @@ function App() {
   }    
 }
 
+
+async function downloadInvoice(){
+  setMsg("Fetching Invoice...");
+  const apiUrl = 'http://localhost:8000/api/v1/downloadInvoice';
+  let response = await axios.get(apiUrl , {
+                      responseType:'blob',
+                      headers:{
+                          'Accept':'application/pdf'
+                      }
+                  });
+  const fileName = 'Invoice.pdf';
+  const blobObj = new Blob([response.data],{type:'application/pdf'});
+  const anchorLink = await document.createElement('a');
+  anchorLink.href = await window.URL.createObjectURL(blobObj);
+  
+  await anchorLink.setAttribute('download',fileName);
+  anchorLink.click();
+  setMsg("Downloaded");
+  setTimeout(() => {
+    setMsg("")
+}, 2000);
+}
+
   return (
     <div className="App">
       
@@ -84,9 +107,9 @@ function App() {
           <Route path='/login-user' element={ <LogIn handleUser = {setUser}/> }/>
           <Route path='/add-user' element={ <Register /> }/>
           
-          <Route path='/' element={user ? <Product handleCart={handleAddToCart} removeCart={handleRemoveCart} user = {user}/> : <Navigate to='/login-user'/> }/>
-          <Route path='/CART' element={user ? <Bucket handleCheckout={handleCheckout} checkout={checkoutItems} setCheckout = {setCheckout}  user={user} cartItem={cartItem} handleCart={handleAddToCart} removeCart={handleRemoveCart} msg ={msg}/> : <Navigate to='/login-user'/>}/>
-          <Route path='/checkout' element={user ? <Checkout checkout={checkoutItems} setCheckout = {setCheckout} user = {user}/> : <Navigate to='/login-user'/> }/>
+          <Route path='/' element={user ? <Product downloadInvoice={downloadInvoice} handleCart={handleAddToCart} removeCart={handleRemoveCart} user = {user}/> : <Navigate to='/login-user'/> }/>
+          <Route path='/CART' element={user ? <Bucket downloadInvoice={downloadInvoice} handleCheckout={handleCheckout} checkout={checkoutItems} setCheckout = {setCheckout}  user={user} cartItem={cartItem} handleCart={handleAddToCart} removeCart={handleRemoveCart} msg ={msg}/> : <Navigate to='/login-user'/>}/>
+          <Route path='/checkout' element={user ? <Checkout downloadInvoice={downloadInvoice} checkout={checkoutItems} setCheckout = {setCheckout} user = {user}/> : <Navigate to='/login-user'/> }/>
         </Routes>
       </BrowserRouter>
       
