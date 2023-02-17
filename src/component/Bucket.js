@@ -3,10 +3,11 @@ import Table from 'react-bootstrap/Table';
 
 function Bucket (props) {
     const {cartItem  , handleCart , removeCart , handleCheckout} = props;
-    let itemPrice = cartItem.reduce( (a , c )=> a+c.price*c.qty , 0);
-    let taxPrice = itemPrice*0.14;
-    let shippingPrice = itemPrice > 2000 ? 0 : 50;
-    let totalPrice = itemPrice + taxPrice + shippingPrice;
+    let itemPrice = cartItem.reduce( (a , c )=> a+c.MRP*c.Unit , 0);
+    let discount = itemPrice*.2;
+    let amount = itemPrice - discount;
+    let taxPrice = amount*0.18;
+    let totalPrice = amount + taxPrice;
     let i=0;
 
 
@@ -41,16 +42,16 @@ function Bucket (props) {
                         <tr key={i++}>
                             <td>{item.keys}</td>
                         <td><img className='tableImg' src={item.image} alt="itemImg" /></td>
-                        <td>{item.name}</td>
+                        <td>{item.SysListName}</td>
                         <td>
                             <button onClick={()=>handleCart(item)} className="add">+</button>
                             <span className='qty'>
-                                {item.qty}
+                                {item.Unit}
                             </span>
                             <button onClick={()=>removeCart(item)} className="remove">-</button>
                         </td>
-                        <td>{item.price}</td>
-                        <td>{item.qty*item.price}</td>
+                        <td>{item.MRP}</td>
+                        <td>{item.Unit*item.MRP}</td>
                     </tr>
                     ))}
                 </tbody>
@@ -66,13 +67,19 @@ function Bucket (props) {
                         <div className='col-1 text-right'>{itemPrice.toFixed(2)}</div>
                     </div>
                     <div className='row'>
+                        <div className='col-2'>Discount 20%</div>
+                        <div className='col-1 text-right'>{discount.toFixed(2)}</div>
+                    </div>
+
+                    <div className='row'>
+                        <div className='col-2'>Amount </div>
+                        <div className='col-1 text-right'>{amount.toFixed(2)}</div>
+                    </div>
+                    <div className='row'>
                         <div className='col-2'>Tax Price</div>
                         <div className='col-1 text-right'>{taxPrice.toFixed(2)}</div>
                     </div>
-                    <div className='row'>
-                        <div className='col-2'>Shipping Price</div>
-                        <div className='col-1 text-right'>{shippingPrice.toFixed(2)}</div>
-                    </div>
+                    
                     <div className='row'>
                         
                         <div className='col-2 fw-bolder text-info fs-4'>Total Price </div>

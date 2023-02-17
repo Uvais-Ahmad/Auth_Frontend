@@ -24,12 +24,12 @@ function App() {
     if(productExist){
       //we increse the qty of existing product
       setCartItem( cartItem.map( item => 
-        (item.keys === product.keys ? {...productExist , qty : productExist.qty+1 } :item)
+        (item.keys === product.keys ? {...productExist , Unit : productExist.Unit+1 } :item)
       ));
     
     }
     else{
-      setCartItem([...cartItem,{...product , qty:1}]);
+      setCartItem([...cartItem,{...product , Unit:1}]);
     }
     
   }
@@ -37,12 +37,12 @@ function App() {
   function handleRemoveCart(product){
     let productExist = cartItem.find(item => item.keys === product.keys)
     //it means now we should remove from cart
-    if(productExist.qty === 1){
+    if(productExist.Unit === 1){
       setCartItem(cartItem.filter(item=> item.keys !== product.keys))
     }
     else{
       setCartItem(cartItem.map(item =>(
-        item.keys === product.keys ? {...productExist , qty : productExist.qty -1} : item
+        item.keys === product.keys ? {...productExist , Unit : productExist.Unit -1} : item
       )))
     }
   }
