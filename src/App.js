@@ -4,7 +4,6 @@ import LogIn from './component/LogIn';
 import Register from './component/Register';
 import { useState } from 'react';
 import NavvBar from './component/NavBar';
-import Protected from './component/Protected';
 import Product from './component/Product';
 import Bucket from './component/Bucket';
 import Checkout from './component/Checkout';
@@ -15,12 +14,10 @@ function App() {
   const [user , setUser] = useState();
   const [cartItem , setCartItem] = useState([]);
   const [checkoutItems , setCheckout] = useState([]);
+  const [msg , setMsg] = useState("");
 
   //add to cart from product
   function handleAddToCart(product){
-
-    console.log("HandleAddTocart",product)
-
     let productExist = cartItem.find(item => item.keys === product.keys)
     if(productExist){
       //we increse the qty of existing product
@@ -31,12 +28,12 @@ function App() {
     }
     else{
       setCartItem([...cartItem,{...product , Unit:1}]);
-    }
-    
+    }  
   }
+
+
   // remove a particular cart item
-  function handleRemoveCart(product){
-    console.log("Handleremovecart",product)
+  function handleRemoveCart(product){ 
     let productExist = cartItem.find(item => item.keys === product.keys)
     //it means now we should remove from cart
     console.log("Exist ",productExist)
@@ -49,17 +46,20 @@ function App() {
       )))
     }
   }
+
+
   //add all cartItem to checkout item and Store all item in Database
   async function handleCheckout(){
     //here we passs cart item for storign in database 
     try{
+      setMsg("Loading...")
       let url = 'http://localhost:8000/api/v1/order'
-      let order = await axios.post(url,cartItem);
+      await axios.post(url,cartItem);
+      setMsg("Checkout Success...");
       
-      console.log("Order ",order);
       await setCheckout([...checkoutItems,{cartItem:cartItem}]);
       await setCartItem([]); 
-      alert('order successfull added') 
+      setMsg("");
   }
   catch(err){
       console.log("Error while order product req ",err);
@@ -69,10 +69,9 @@ function App() {
           err.response.status<=500
           ){
               console.log(err.response.data.message);
+              setMsg(err.response.data.message)
           }
-  }
-
-    
+  }    
 }
 
   return (
@@ -81,11 +80,12 @@ function App() {
       <BrowserRouter >
       <NavvBar user = {user}  handleUser = {setUser} countCartItem = {cartItem.length}/>
         <Routes>
-          <Route path='/' element={ <Protected Component={Product} user={user} handleCart={handleAddToCart} removeCart={handleRemoveCart}/>} />
+          
           <Route path='/login-user' element={ <LogIn handleUser = {setUser}/> }/>
           <Route path='/add-user' element={ <Register /> }/>
           
-          <Route path='/CART' element={user ? <Bucket handleCheckout={handleCheckout} checkout={checkoutItems} setCheckout = {setCheckout}  user={user} cartItem={cartItem} handleCart={handleAddToCart} removeCart={handleRemoveCart}/> : <Navigate to='/login-user'/>}/>
+          <Route path='/' element={user ? <Product handleCart={handleAddToCart} removeCart={handleRemoveCart} user = {user}/> : <Navigate to='/login-user'/> }/>
+          <Route path='/CART' element={user ? <Bucket handleCheckout={handleCheckout} checkout={checkoutItems} setCheckout = {setCheckout}  user={user} cartItem={cartItem} handleCart={handleAddToCart} removeCart={handleRemoveCart} msg ={msg}/> : <Navigate to='/login-user'/>}/>
           <Route path='/checkout' element={user ? <Checkout checkout={checkoutItems} setCheckout = {setCheckout} user = {user}/> : <Navigate to='/login-user'/> }/>
         </Routes>
       </BrowserRouter>

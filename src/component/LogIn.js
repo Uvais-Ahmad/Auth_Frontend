@@ -1,6 +1,6 @@
-import { Button, Form, FormControl, FormGroup, FormLabel, FormText } from "react-bootstrap";
+import { Button, Form, FormControl, FormGroup, FormLabel } from "react-bootstrap";
 import './LogIn.css';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -34,11 +34,7 @@ function LogIn (props){
             e.preventDefault();
             
             let url = 'https://mernauth.onrender.com/api/v1/login-user';
-
-
-            let user = await axios.post(url,userInfo);
-
-            
+            let user = await axios.post(url,userInfo); 
             const token = user.data.data.access_token;
             const id = user.data.data.id;
 
@@ -69,6 +65,10 @@ function LogIn (props){
         <>
             {
                 status && <h1 style={{textAlign:'center',color:'blueviolet'}}>Loading......</h1>
+                
+            }
+            {status && 
+                <h4 style={{textAlign:'center',color:'blueviolet'}}>server slow, wait a minutes please...</h4>
             }
             <Form className="Form px-5 py-3 mx-auto" onSubmit={handleSubmit}>
                 <h1 style={{textAlign:'center'}} className="mb-3">Log In</h1>

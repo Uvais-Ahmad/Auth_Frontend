@@ -2,7 +2,8 @@ import './Bucket.css';
 import Table from 'react-bootstrap/Table';
 
 function Bucket (props) {
-    const {cartItem  , handleCart , removeCart , handleCheckout} = props;
+    const {cartItem  , handleCart , removeCart , handleCheckout , msg} = props;
+
     let itemPrice = cartItem.reduce( (a , c )=> a+c.MRP*c.Unit , 0);
     let discount = itemPrice*.2;
     let amount = itemPrice - discount;
@@ -75,6 +76,7 @@ function Bucket (props) {
                     </div>
                     
                     <div className='row'>
+                    <span className="text-warning fw-bolder fs-5 ms-1 ">{msg}</span>
                         <button className='btn btn-success w-25 fs-5 fw-bold' onClick={()=>handleCheckout()}>Checkout</button>
                     </div>
                     </div>

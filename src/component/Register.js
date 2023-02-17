@@ -8,27 +8,20 @@ function Register () {
         name:"",phone:"",password:"",confirm_password:""
     })
 
-
     const [status , setStatus] = useState(false);
-
     const navigate = useNavigate();
     const [error , setError] = useState("");
     
-
-    function handleChange(e){
-        
+    function handleChange(e){    
         setUserInfo({...userInfo , [e.target.name] : e.target.value})
     }
 
     async function handleSubmit(e){
-        
         try{
             e.preventDefault();
             let url = 'https://mernauth.onrender.com/api/v1/add-user';
-            let user = await axios.post(url,userInfo);
-            
-            navigate('/login-user');
-            
+            await axios.post(url,userInfo);
+            navigate('/login-user');    
         }
         catch(err){
             console.log("Error while POST req ",err);
@@ -46,6 +39,9 @@ function Register () {
         <>
             {
                 status && <h1 style={{textAlign:'center',color:'blueviolet'}}>Loading......</h1>
+            }
+            {status && 
+                <h4 style={{textAlign:'center',color:'blueviolet'}}>server slow, wait a minutes please...</h4>
             }
         <Form className="Form h-75 px-5 py-3 mx-auto" onSubmit={handleSubmit}>
             <h1 style={{textAlign:'center'}}>Register</h1>
