@@ -5,13 +5,11 @@ function Card (props){
     let i=0
     let [msg , setMsg] = useState("");
 
-    const {downloadInvoice} = props;
-
     async function orderProduct(e){
         try{
             e.preventDefault();
             setMsg("Loading...");
-            let url = 'http://localhost:8000/api/v1/order'
+            let url = 'https://invoicegenerate.onrender.com/api/v1/order'
             await axios.post(url,props);
             // alert('order successfull added')
             setMsg("Order success");            
@@ -20,7 +18,6 @@ function Card (props){
                 setMsg("Generating Invoice...");
             }, 1000);
             await getInvoice();
-            await downloadInvoice();
             setTimeout(() => {
                 setMsg("");
             }, 2000);
@@ -40,15 +37,30 @@ function Card (props){
 
     async function getInvoice(){
         try{
-            await axios.post('http://localhost:8000/api/v1/getInvoice',props);
-            setMsg("Invoice Generated");
+            let url = 'http://localhost:8000/api/v1/getInvoice'
+            // 'https://invoicegenerate.onrender.com/api/v1/getInvoice'
+
+            setMsg("Fetching Invoice...");
+            let response = await axios.post(url ,props , {
+                                responseType:'blob',
+                                headers:{
+                                    'Accept':'application/pdf'
+                                }
+                            });
+            const fileName = 'Invoice.pdf';
+            const blobObj = new Blob([response.data],{type:'application/pdf'});
+            const anchorLink = await document.createElement('a');
+            anchorLink.href = await window.URL.createObjectURL(blobObj);
+            
+            await anchorLink.setAttribute('download',fileName);
+            anchorLink.click();
+            setMsg("Downloaded");
         }
         catch(err){
             if(err){
                 console.log("Error occur while invoice ",err);
             }
-        }
-        
+        }    
     }
 
 
@@ -65,13 +77,6 @@ function Card (props){
                     <div className="productCard_priceStack">
                         <h2 className="price">{props.MRP} Rs</h2>
                         <span className="text-warning fw-bolder ms-1 ">{msg}</span>
-                        {/* <span>
-                            <button onClick={()=>props.handleCart(props)} className="add">+</button>
-                            <span className='qty'>
-                                {props.Unit}
-                            </span>
-                            <button onClick={()=>props.removeCart(props)} className="remove">-</button>
-                        </span> */}
                     </div>
                 </div>
                 <button type='submit' className='addToCartBtn' onClick={()=>props.handleCart(props)}>Add To Cart</button>

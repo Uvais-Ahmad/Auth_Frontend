@@ -5,52 +5,7 @@ import { useState } from "react";
 function Checkout(props){
     const {checkout} = props;
     let i=0;
-    const [msg , setMsg] = useState("");
-    const {downloadInvoice} = props
-
-    async function getInvoice(data){
-        try{ 
-            setMsg("wait , pdf is generating")
-            await axios.post('http://localhost:8000/api/v1/getInvoice',data);
-        
-            setMsg("Generated successfully");
-            
-            await downloadInvoice();
-
-            setTimeout(() => {
-                setMsg("")
-            }, 2000);
-        }
-        catch(err){
-            if(err){
-                setMsg("Error while generating");
-                setTimeout(() => {
-                    setMsg("")
-                }, 2000);
-                console.log("Error occur while invoice ",err);
-            }
-        }        
-    }
-
-
-    // async function downloadInvoice(){
-    //     setMsg("Fetching Invoice...");
-    //     const apiUrl = 'http://localhost:8000/api/v1/downloadInvoice';
-    //     let response = await axios.get(apiUrl , {
-    //                         responseType:'blob',
-    //                         headers:{
-    //                             'Accept':'application/pdf'
-    //                         }
-    //                     });
-    //     const fileName = 'Invoice.pdf';
-    //     const blobObj = new Blob([response.data],{type:'application/pdf'});
-    //     const anchorLink = await document.createElement('a');
-    //     anchorLink.href = await window.URL.createObjectURL(blobObj);
-        
-    //     await anchorLink.setAttribute('download',fileName);
-    //     anchorLink.click();
-    //     setMsg("Downloaded");
-    // }
+    const {getInvoice , msg} = props
 
     return (
         <>

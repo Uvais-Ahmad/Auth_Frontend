@@ -33,7 +33,7 @@ function LogIn (props){
         try{
             e.preventDefault();
             
-            let url = 'https://mernauth.onrender.com/api/v1/login-user';
+            let url = 'https://invoicegenerate.onrender.com/api/v1/login-user';
             let user = await axios.post(url,userInfo); 
             const token = user.data.data.access_token;
             const id = user.data.data.id;

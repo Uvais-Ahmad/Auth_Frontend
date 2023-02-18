@@ -86,4 +86,4 @@ function Bucket (props) {
     )
 }
 
-export default Bucket;
+export default Bucket; 
