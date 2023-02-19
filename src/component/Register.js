@@ -19,7 +19,8 @@ function Register () {
     async function handleSubmit(e){
         try{
             e.preventDefault();
-            let url = 'https://invoicegenerate.onrender.com/api/v1/add-user';
+            // let url = 'http://35.172.209.228:80/api/v1/add-user';
+            let url = 'https://mern-invoice.up.railway.app/api/v1/add-user'
             await axios.post(url,userInfo);
             navigate('/login-user');    
         }

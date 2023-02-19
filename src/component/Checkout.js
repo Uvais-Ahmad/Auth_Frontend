@@ -1,6 +1,5 @@
-import axios from "axios";
 import { Button } from "react-bootstrap";
-import { useState } from "react";
+
 
 function Checkout(props){
     const {checkout} = props;

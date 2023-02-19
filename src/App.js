@@ -53,7 +53,10 @@ function App() {
     //here we passs cart item for storign in database 
     try{
       setMsg("Loading...")
-      let url = 'https://invoicegenerate.onrender.com/api/v1/order'
+      // let url = 'https://invoicegenerate.onrender.com/api/v1/order'
+      // let url = 'http://35.172.209.228:8000/api/v1/order'
+      let url = 'https://mern-invoice.up.railway.app/api/v1/order'
+
       await axios.post(url,cartItem);
       setMsg("Checkout Success...");
       // await downloadInvoice();
@@ -76,35 +79,12 @@ function App() {
 }
 
 
-// async function downloadInvoice(){
-//   setMsg("Fetching Invoice...");
-//   let url = 'http://localhost:8000/api/v1/downloadInvoice'
-//   const apiUrl = 'https://invoicegenerate.onrender.com/api/v1/downloadInvoice';
-//   let response = await axios.get(url , {
-//                       responseType:'blob',
-//                       headers:{
-//                           'Accept':'application/pdf'
-//                       }
-//                   });
-//   const fileName = 'Invoice.pdf';
-//   const blobObj = new Blob([response.data],{type:'application/pdf'});
-//   const anchorLink = await document.createElement('a');
-//   anchorLink.href = await window.URL.createObjectURL(blobObj);
-  
-//   await anchorLink.setAttribute('download',fileName);
-//   anchorLink.click();
-//   setMsg("Downloaded");
-//   setTimeout(() => {
-//     setMsg("")
-// }, 2000);
-// }
-
-
 async function getInvoice(data){
   try{
     console.log("GetInvoice called with data ",data); 
-      let url = 'http://localhost:8000/api/v1/getInvoice'
-      // 'https://invoicegenerate.onrender.com/api/v1/getInvoice'
+      let url = 'https://mern-invoice.up.railway.app/api/v1/getInvoice'
+      // let url = 'http://35.172.209.228:8000/api/v1/getInvoice'
+      // let url = 'https://invoicegenerate.onrender.com/api/v1/getInvoice'
 
       setMsg("Fetching Invoice...");
       let response = await axios.post(url ,data , {
@@ -114,6 +94,7 @@ async function getInvoice(data){
                           }
                       });
       const fileName = 'Invoice.pdf';
+      console.log("Res data ",response.data);
       const blobObj = new Blob([response.data],{type:'application/pdf'});
       const anchorLink = await document.createElement('a');
       anchorLink.href = await window.URL.createObjectURL(blobObj);

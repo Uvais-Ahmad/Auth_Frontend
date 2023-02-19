@@ -32,8 +32,9 @@ function LogIn (props){
     async function handleSubmit(e){
         try{
             e.preventDefault();
-            
-            let url = 'https://invoicegenerate.onrender.com/api/v1/login-user';
+            let url = 'https://mern-invoice.up.railway.app/api/v1/login-user'
+            // let url = 'http://100.26.232.24/api/v1/login-user';
+            // let url = 'https://invoicegenerate.onrender.com/api/v1/login-user'
             let user = await axios.post(url,userInfo); 
             const token = user.data.data.access_token;
             const id = user.data.data.id;

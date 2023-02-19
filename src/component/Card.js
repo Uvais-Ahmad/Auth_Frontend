@@ -9,7 +9,9 @@ function Card (props){
         try{
             e.preventDefault();
             setMsg("Loading...");
-            let url = 'https://invoicegenerate.onrender.com/api/v1/order'
+            // let url = 'http://100.26.232.24/api/v1/order'
+            let url = 'https://mern-invoice.up.railway.app/api/v1/order'
+            // let url = 'https://invoicegenerate.onrender.com/api/v1/order'
             await axios.post(url,props);
             // alert('order successfull added')
             setMsg("Order success");            
@@ -37,8 +39,8 @@ function Card (props){
 
     async function getInvoice(){
         try{
-            let url = 'http://localhost:8000/api/v1/getInvoice'
-            // 'https://invoicegenerate.onrender.com/api/v1/getInvoice'
+            // let url = 'http://100.26.232.24/api/v1/getInvoice'
+            let url = 'https://mern-invoice.up.railway.app/api/v1/getInvoice'
 
             setMsg("Fetching Invoice...");
             let response = await axios.post(url ,props , {
